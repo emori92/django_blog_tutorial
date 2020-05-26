@@ -1,8 +1,11 @@
-db.sqlite3
-__pycache__
 *.pyc
 *.pot
 *.log
+__pycache__
 /.vscode
-local_settings.py
+
+local.py
 media
+db.sqlite3
+
+.env
