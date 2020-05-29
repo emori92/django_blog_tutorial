@@ -14,7 +14,7 @@ import os
 
 
 # base dir
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PROJECT_NAME = os.path.basename(BASE_DIR)
 
 
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogs.app.BlogsConfig',
+    'blogs.apps.BlogsConfig',
 ]
 
 MIDDLEWARE = [
