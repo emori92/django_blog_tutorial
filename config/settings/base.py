@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.contrib.messages import constants  # add alert class
 
 
 # base dir
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 PROJECT_NAME = os.path.basename(BASE_DIR)
 
 
@@ -22,6 +24,15 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 DEBUG = False
 
 ALLOWED_HOSTS = []
+
+
+# message
+MESSAGE_TAGS = {
+    constants.ERROR: 'alert alert-danger',
+    constants.WARNING: 'alert alert-warning',
+    constants.SUCCESS: 'alert alert-success',
+    constants.INFO: 'alert alert-info',
+}
 
 
 # Application definition
