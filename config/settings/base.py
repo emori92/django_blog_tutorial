@@ -25,6 +25,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
+
 
 # message
 MESSAGE_TAGS = {
@@ -43,7 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # apps
     'blogs.apps.BlogsConfig',
+    'accounts.apps.AccountsConfig',
+    # all auth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +108,26 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# user model
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# auth setting
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',  # user => mail
+    'django.contrib.auth.backends.ModelBackend',  # admin => username
+)
+# auth mail
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+# signup setting
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+# login/logout
+LOGIN_REDIRECT_URL = 'blogs:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'accout_login'
+ACCOUNT_LOGOUT_ON_GET = True
 
 
 # Internationalization
