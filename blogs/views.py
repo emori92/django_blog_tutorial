@@ -4,7 +4,10 @@ import logging
 from django.contrib import messages
 
 from django.views import View
-from django.views.generic import TemplateView, RedirectView, FormView
+from django.views.generic import TemplateView, RedirectView, FormView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .models import Blog
 from .forms import InquiryForm
 
 
@@ -27,3 +30,13 @@ class InquiryView(FormView):
         messages.success(self.request, 'メッセージを送信しました。')
         logger.info(f'Inquiry sent by {form.cleaned_data["name"]}')
         return super().form_valid(form)
+    
+    
+class BlogListView(LoginRequiredMixin, ListView):
+    model = Blog
+    template_name = "blog:blog_list.html"
+    paginate_by = 2
+
+    def get_queryset(self):
+        blogs = Blog.objects.filter(user=self.request.user).order_by('-created_at')
+        return blogs
