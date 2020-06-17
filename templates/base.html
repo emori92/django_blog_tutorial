@@ -48,9 +48,14 @@
           
           <!-- additional -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-itm {% block active_inquiry %}{% endblock active_inquiry %}">
+            <li class="nav-item {% block active_inquiry %}{% endblock active_inquiry %}">
               <a href="{% url 'blogs:inquiry' %}" class="nav-link">INQUIRY</a>
             </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item {% block active_blog_list %}{% endblock %}">
+                <a href="{% url 'blogs:blog_list' %}" class="nav-link">BLOG LIST</a>
+              </li>
+            {% endif %}
           </ul>
 
           <ul class="navbar-nav ml-auto">
