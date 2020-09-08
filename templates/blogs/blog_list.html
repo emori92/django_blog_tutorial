@@ -27,9 +27,9 @@
           <!-- list -->
           {% for blog in object_list %}
             <div class="post-preview">
-              <a href="#">
+              <a href="{% url 'blogs:blog_detail' blog.id %}">
                 <h2 class="post-title">
-                {{ blog.title }}
+                  {{ blog.title }}
                 </h2>
                 <h3 class="post-subtitle">
                   {{ blog.content|truncatechars:20 }}

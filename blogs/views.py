@@ -4,7 +4,7 @@ import logging
 from django.contrib import messages
 
 from django.views import View
-from django.views.generic import TemplateView, RedirectView, FormView, ListView
+from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Blog
@@ -15,12 +15,13 @@ from .forms import InquiryForm
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
-class Index(TemplateView):
+# index
+class Index(generic.TemplateView):
     template_name = 'blogs/index.html'
 
 
-class InquiryView(FormView):
+# お問い合わせ
+class InquiryView(generic.FormView):
     template_name = 'blogs/inquiry.html'
     form_class = InquiryForm
     success_url = reverse_lazy('blogs:inquiry')
@@ -32,7 +33,8 @@ class InquiryView(FormView):
         return super().form_valid(form)
     
     
-class BlogListView(LoginRequiredMixin, ListView):
+# ブログ一覧
+class BlogListView(LoginRequiredMixin, generic.ListView):
     model = Blog
     template_name = "blog:blog_list.html"
     paginate_by = 2
@@ -40,3 +42,9 @@ class BlogListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         blogs = Blog.objects.filter(user=self.request.user).order_by('-created_at')
         return blogs
+    
+    
+# detail
+class BlogDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Blog
+    template_name = "blogs/blog_detail.html"
