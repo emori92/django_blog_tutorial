@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}日記詳細{% endblock title %}
+
+{% block active_blog_list %}active{% endblock active_blog_list %}
+
+
+{% block content %}
+  <div class="container">
+    <div class="my-div-style w-100">
+      <div class="row">
+        <div class="col-3">
+          <strong>タイトル</strong>
+        </div>
+        <div class="col-9">
+          {{ object.title }}
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-3">
+          <strong>本文</strong>
+        </div>
+        <div class="col-9">
+          {{ object.content|linebreaksbr }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <strong>写真</strong>
+        </div>
+        <div class="col-3">
+          <img src="{% if object.photo1 %}{{ object.photo1.url }}{% elif object.photo2 %}{{ object.photo2.url }}{% elif object.photo3 %}{{ object.photo3.url }}{% endif %}" alt="blog-image" width="200">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-3">
+          <strong>作成日時</strong>
+        </div>
+        <div class="col-9">
+          {{ object.created_at }}
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-3">
+          <strong>更新日時</strong>
+        </div>
+        <div class="col-9">
+          {{ object.updated_at }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
